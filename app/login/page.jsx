@@ -1,5 +1,5 @@
-'use client'
-import React,{useEffect, useState} from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
@@ -7,29 +7,28 @@ import { toast } from "sonner";
 
 const page = () => {
   const { data: session, status } = useSession();
-  const router=useRouter();
-  const [email,setEmail]=useState();
-  const [password,setPassword]=useState();
-  const [loading,setLoading]=useState(false);
-  const [error,setError]=useState();
+  const router = useRouter();
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
 
-
-  useEffect(() => {
-    if (status === "authenticated") {
-      console.log("Already authenticated, redirecting to dashboard");
-      router.push("/dashboard");
-    }
-  }, [status, router]);
+  // useEffect(() => {
+  //   if (status === "authenticated") {
+  //     console.log("Already authenticated, redirecting to dashboard");
+  //     router.push("/dashboard");
+  //   }
+  // }, [status, router]);
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError("");
-    console.log('clicked Login');
+    console.log("clicked Login");
     try {
       const result = await signIn("credentials", {
         redirect: false,
         email: email,
-        password:password,
+        password: password,
       });
 
       if (result.error) {
@@ -56,7 +55,7 @@ const page = () => {
     }
   };
   return (
-    <div className="flex flex-row items-center justify-center h-screen w-screen bg-[#673b86] ">
+    <div className="flex flex-row items-center justify-center h-screen w-screen bg-[url('/images/wood.jpg')] bg-cover ">
       <div className="flex flex-col   bg-[#1c1d21]    h-[800px] w-[800px] rounded-l-2xl md:h-[600px] md:w-[600px]">
         <div className=" justify-between items-start flex flex-col ">
           {" "}
@@ -82,28 +81,34 @@ const page = () => {
                   placeholder="Username "
                   type="text"
                   id="username"
-                  onChange={(e)=>setEmail(e.target.value)}
+                  onChange={(e) => setEmail(e.target.value)}
                 />
                 <input
                   className="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
                   placeholder="Password"
                   type="password"
                   id="password"
-                  onChange={(e)=>setPassword(e.target.value)}
-
+                  onChange={(e) => setPassword(e.target.value)}
                 />
                 <span>Forgot Password?</span>
-                <button onClick={handleLogin} className="hover:bg-[#4e3275] rounded-md bg-[#9d6ee0] w-full p-2 cursor-pointer">
+                <button
+                  onClick={handleLogin}
+                  className="hover:bg-[#4e3275] rounded-md bg-[#9d6ee0] w-full p-2 cursor-pointer"
+                >
                   Login
                 </button>
 
                 <div className="flex flex-row items-center gap-8 w-full text-nowrap">
                   <p className="text-xs">Don't have an account ?</p>
-                  <button  className="hover:bg-[#4e3275] rounded-md bg-[#9d6ee0] w-full p-2 cursor-pointer">
+                  <button className="hover:bg-[#4e3275] rounded-md bg-[#9d6ee0] w-full p-2 cursor-pointer">
                     Sign up
                   </button>
+
                 </div>
+
               </div>
+                                                {error && <div>{error}</div>}
+
             </div>
           </div>
           <div className=" flex flex-col justify-start items-start  ">

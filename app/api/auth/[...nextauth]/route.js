@@ -95,8 +95,6 @@ export const authOptions = {
           const passwordMatch = await comparePassword(credentials.password, user.password);
           if (!passwordMatch) {
             if (process.env.NODE_ENV === 'development') {
-                console.log('credentialspassword',credentials.password)
-                console.log('userpassword',user.password)
               console.log("Password doesn't match for user:", user.email);
             }
             return null;
