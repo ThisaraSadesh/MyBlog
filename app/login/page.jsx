@@ -56,7 +56,7 @@ const page = () => {
   };
   return (
     <div className="flex flex-row items-center justify-center h-screen w-screen bg-[url('/images/wood.jpg')] bg-cover ">
-      <div className="flex flex-col   bg-[#1c1d21]    h-[800px] w-[800px] rounded-l-2xl md:h-[600px] md:w-[600px]">
+      <div className="flex flex-col   bg-[#1c1d21]    h-[800px] w-[800px] rounded-l-2xl md:h-[600px] md:w-[600px] shadow-lg shadow-black ">
         <div className=" justify-between items-start flex flex-col ">
           {" "}
           <Image
@@ -123,7 +123,7 @@ const page = () => {
         </div>
       </div>
 
-      <div className="bg-[url('/images/blogbanner.jpg')] bg-cover bg-center md:h-[600px] md:w-[600px] h-[800px] w-[800px] rounded-r-2xl">
+      <div className="bg-[url('/images/blogbanner.jpg')] bg-cover bg-center md:h-[600px] md:w-[600px] h-[800px] w-[800px] rounded-r-2xl shadow-lg shadow-black ">
         <div className=" justify-between items-end flex flex-col h-full ">
           {" "}
           <Image
