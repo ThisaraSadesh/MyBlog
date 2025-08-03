@@ -78,8 +78,10 @@ export const authOptions = {
           if (process.env.NODE_ENV === 'development') {
             console.log("Attempting to authorize:", credentials.email);
           }
+          console.log("Credentials received:", credentials);
           
           const user = await getUserByEmail(credentials.email);
+          console.log("User fetched:", user);
           
           if (!user) {
             if (process.env.NODE_ENV === 'development') {
