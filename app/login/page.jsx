@@ -103,12 +103,9 @@ const page = () => {
                   <button className="hover:bg-[#4e3275] rounded-md bg-[#9d6ee0] w-full p-2 cursor-pointer">
                     Sign up
                   </button>
-
                 </div>
-
               </div>
-                                                {error && <div>{error}</div>}
-
+              {error && <div>{error}</div>}
             </div>
           </div>
           <div className=" flex flex-col justify-start items-start  ">

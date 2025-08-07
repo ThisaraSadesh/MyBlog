@@ -1,26 +1,25 @@
-// components/BlogList.js
-
 "use client";
 
 import React, { useState, useEffect } from "react";
 
-const BlogList = () => {
-  const [blogs, setBlogs] = useState([]);
 
-  useEffect(() => {
+const BlogList = ({ blogs,  limit, setHasMore, setBlogs }) => {
+  const [skip, setSkip] = useState(0);
+  const [hasMore,setHasMore] = useState(true);
+
+
     const fetchBlogs = async () => {
       try {
-        const response = await fetch("/api/blog/blogs");
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        if (blogs.length < limit) {
+          setHasMore(false); // No more blogs to load
         }
-        const data = await response.json();
-        setBlogs(data);
+        setBlogs((prev) => [...prev, ...blogs]);
+        setSkip((prev) => prev + limit);
       } catch (error) {
         console.error("Error fetching blogs:", error);
       }
     };
-
+  useEffect(() => {
     fetchBlogs();
   }, []);
 

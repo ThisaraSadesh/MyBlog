@@ -7,5 +7,10 @@ export default function SidebarWrapper() {
   const pathname = usePathname();
   const showSidebar = pathname !== "/login";
 
-  return showSidebar ? <Sidebar /> : null;
+  return showSidebar ? (
+    <div className="mr-[200px]">
+    
+      <Sidebar />
+    </div>
+  ) : null;
 }

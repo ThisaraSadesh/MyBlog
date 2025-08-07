@@ -1,28 +1,60 @@
+"use client";
+
 import { fetchBlogs } from "../actions/blogs/blogs";
 import PostCard from "../componets/ui/PostCard";
 import { formatDate } from "../actions/formatDate";
 import Image from "next/image";
 import ContinueReadingBtn from "../componets/ui/ContinueReadingBtn";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Pagination from "./Pagination";
+import { useSession } from "next-auth/react";
+import { handleBlogClick } from "../actions/blogs/handleBlogClick";
+import LoadingSplash from "./LoadingSplash";
 
-const page = async () => {
-  const blogs = await fetchBlogs();
+const page = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [blogsLength, setBlogsLength] = useState(0);
+  const [currentPage, setCurrentPage] = useState(1);
+  const limit = 4;
+  const { data: session, status } = useSession();
+  const router = useRouter();
+  const [showComponent, setShowComponent] = useState(true);
 
-  // const handleClickContinueReading = (blogId) => {
-  //   router.push(`/blog/${blogId}`);
-  // };
+  
+  useEffect(() => {
+    const fetchAll = async () => {
+      const skip = (currentPage - 1) * limit;
+      const { blogs, blogsLength } = await fetchBlogs(limit, skip);
+      setBlogsLength(blogsLength);
+      setBlogs(blogs);
+    };
+    fetchAll();
+  }, [currentPage, status, session]);
+
+
+useEffect(() => {
+  const timeout = setTimeout(() => {
+    setShowComponent(false);
+  }, 1000);
+  return () => clearTimeout(timeout);
+}, []);
 
   return (
-    <div className=" text-white p-8 w-screen bg-[url('/images/wood.jpg')] bg-center bg-cover ml-[200px]">
+    <div className=" text-white  w-screen h-screen">
       {/* <Button>Create new Blog</Button> */}
-      <div className="max-w-6xl mx-auto">
+    
+      {showComponent && session?.user?.name ? <LoadingSplash /> : (
+      <div className="max-w-5xl mx-auto m-5">
+        <h1 className="mask-b-from-3.5">Dashboard</h1>
         {blogs.length > 0 && (
-          <div className="flex flex-row mb-10 gap-3 justify-center items-center  ">
-            <div className=" flex flex-row justify-center items-center gap-3 px-3 py-3 ">
+          <div className="flex flex-row mb-10 gap-3 justify-around items-center bg-black px-5 py-5  rounded-4xl ">
+            <div className=" flex flex-row justify-center items-center gap-3 px-3 py-3  ">
               <Image
-                className="rounded-lg shadow-lg shadow-black"
+                className="rounded-lg shadow-lg shadow-black object-cover w-[450px] h-[450px]"
                 src={blogs[0].image}
-                width={500}
-                height={300}
+                width={450}
+                height={450}
                 quality={100}
                 alt="image"
               ></Image>
@@ -40,21 +72,30 @@ const page = async () => {
           </div>
         )}
 
-        <div className="grid grid-cols-3 gap-6 justify-center items-center">
+        <div className="grid grid-cols-3 gap-6 justify-center items-center bg-black rounded-4xl p-3">
           {blogs.slice(1).map((blog) => (
-            <div key={blog.blogId} className=" rounded-lg">
+            <div key={blog._id} className=" rounded-lg ">
               <PostCard
                 title={blog.title}
                 description={blog.description}
                 date={formatDate(blog.date)}
                 field={blog.field}
                 image={blog.image}
+                blogId={blog.blogId}
               />
             </div>
           ))}
         </div>
+        <Pagination
+          totalItems={blogsLength}
+          dataForPage={limit}
+          setCurrentPage={setCurrentPage}
+          currentPage={currentPage}
+        />
       </div>
-    </div>
+   
+      )}
+       </div>
   );
 };
 

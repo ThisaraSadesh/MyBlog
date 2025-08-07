@@ -6,7 +6,7 @@ const ContinueReadingBtn = ({redirectUrl}) => {
   <span>
     <a
       href={redirectUrl}
-      className="inline-block bg-pink-600 text-white px-6 py-2 rounded-lg hover:bg-pink-700 transition"
+      className="inline-block bg-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-700 transition"
     >
       Continue Reading →
     </a>

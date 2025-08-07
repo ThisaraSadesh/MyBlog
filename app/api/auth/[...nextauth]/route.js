@@ -110,7 +110,8 @@ export const authOptions = {
             user._id.toString(),
             user.email,
             user.name,
-            user.role
+            user.role,
+            user.image
           );
           
           if (!sessionStored) {
@@ -123,6 +124,7 @@ export const authOptions = {
             userId: user.userId || user.email, // New field
             name: user.name,
             role: user.role,
+            image:user.image
           };
         } catch (error) {
           console.error("Auth error:", error);
@@ -136,6 +138,7 @@ export const authOptions = {
       if (user) {
         token.role = user.role;
         token.id = user.id;
+        token.image=user.image;
         
         try {
           const client = await clientPromise;
@@ -155,6 +158,7 @@ export const authOptions = {
       if (token) {
         session.user.role = token.role;
         session.user.id = token.id;
+        session.user.image=token.image;
       }
       return session;
     }
