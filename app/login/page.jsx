@@ -41,7 +41,7 @@ const page = () => {
         toast.success("Authentication Successful!", {
           description: "You will be redirected to portal soon.",
         });
-        router.push("/dashboard");
+        router.push("/dashboard?welcome=true");
       }
     } catch (err) {
       console.error("Login error:", err);

@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased
-          bg-[url('/images/wood.jpg')] bg-center bg-cover bg-fixed min-h-screen `}
+          bg-white bg-fixed min-h-screen `}
       >
         <div className="flex flex-row scroll-smooth">
           {" "}
