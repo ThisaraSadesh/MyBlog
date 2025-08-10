@@ -10,7 +10,7 @@ const Pagination = ({ totalItems, dataForPage,setCurrentPage,currentPage }) => {
     <div>
     <div className="flex flex-row items-center justify-center ">
       {pages.map((page, index) => {
-        return <button onClick={()=>setCurrentPage(page)} className={currentPage===page?"bg-white hover:text-black p-3 m-3 cursor-pointer rounded-full text-black":" cursor-pointer  m-3 bg-black text-white p-3 rounded-full hover:bg-white hover:text-black"} key={index}>{page} </button>;
+        return <button onClick={()=>setCurrentPage(page)} className={currentPage===page?"bg-white hover:text-black p-3 m-3 cursor-pointer rounded-full text-black w-12 h-12":"w-12 h-12 cursor-pointer  m-3 bg-black text-white p-3 rounded-full hover:bg-white hover:text-black"} key={index}>{page} </button>;
       })}
       </div>
     </div>

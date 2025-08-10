@@ -79,9 +79,9 @@ const page = () => {
             </div>
           )}
 
-          <div className="grid grid-cols-3 gap-6 justify-center items-center bg-black rounded-4xl p-3">
+          <div className="grid grid-cols-3 gap-6 justify-center items-center  rounded-4xl p-3 w-full">
             {blogs.slice(1).map((blog) => (
-              <div key={blog._id} className=" rounded-lg ">
+              <div key={blog._id} className=" rounded-lg bg-black p-1 w-full ">
                 <PostCard
                   title={blog.title}
                   description={blog.description}
@@ -89,6 +89,8 @@ const page = () => {
                   field={blog.field}
                   image={blog.image}
                   blogId={blog.blogId}
+                  bookmark={true}
+                  
                 />
               </div>
             ))}

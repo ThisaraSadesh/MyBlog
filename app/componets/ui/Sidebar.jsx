@@ -9,7 +9,7 @@ const Sidebar = () => {
   const { data: session, status } = useSession();
   return (
     <div className="flex flex-col h-full  w-[200px] justify-start items-start fixed bg-black">
-      <div className="flex flex-col gap-5   border-r-amber-50 border-r-1 px-3 py-3 items-start justify-start h-full ">
+      <div className="flex flex-col gap-5   border-r-black border-r-1 px-3 py-3 items-start justify-start h-full ">
         <div className="flex flex-col items-start justify-between gap-1">
           <div className="flex flex-col ">
             <Image
@@ -19,38 +19,34 @@ const Sidebar = () => {
               alt="blogger"
             ></Image>
           </div>
-          <div className="flex flex-col gap-2 items-start justify-between h-[600px]">
-            <nav>
-              <ul className="flex flex-col gap-3 ">
-                <Link
-                  className="hover:bg-white hover:text-black cursor-pointer rounded-full p-2"
-                  href="/dashboard"
-                >
-                  Dashboard
-                </Link>
+          <div className="flex flex-col items-start justify-between h-[600px] w-full">
+          <div className="flex flex-col justify-center items-center w-full h-full"> 
+              <nav className="w-full">
+                <ul className="flex flex-col  justify-center items-start gap-10 w-full ">
+                  <Link
+                    className="w-full hover:bg-white   hover:text-black cursor-pointer p-2"
+                    href="/dashboard"
+                  >
+                    Dashboard
+                  </Link>
 
-                <Link
-                  href="/bookmarks"
-                  className="hover:bg-white hover:text-black cursor-pointer rounded-full p-2"
-                >
-                  Bookmarks
-                </Link>
+                  <Link
+                    href="/bookmarks"
+                    className="w-full hover:bg-white hover:text-black cursor-pointer  p-2"
+                  >
+                    Bookmarks
+                  </Link>
 
-                <Link
-                  href="/blogs"
-                  className="hover:bg-white hover:text-black cursor-pointer rounded-full p-2"
-                >
-                  My Blogs
-                </Link>
-                <Link
-                  href="/profile"
-                  className="hover:bg-white hover:text-black cursor-pointer rounded-full p-2"
-                >
-                  Profile
-                </Link>
-              </ul>
-            </nav>
-
+                  <Link
+                    href="/blogs"
+                    className="w-full hover:bg-white hover:text-black cursor-pointer  p-2"
+                  >
+                    My Blogs
+                  </Link>
+                
+                </ul>
+              </nav>
+              </div>
             <div>
               <Avatar alt="Remy Sharp" src={session?.user?.image} />
             </div>
