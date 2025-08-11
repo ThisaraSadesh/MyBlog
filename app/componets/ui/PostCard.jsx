@@ -3,7 +3,8 @@ import React from "react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Star } from "lucide-react";
-
+import { createBookmark } from "../../actions/bookmarks/bookmarks";
+import { toast } from "sonner";
 const PostCard = ({
   title,
   description,
@@ -12,19 +13,23 @@ const PostCard = ({
   image,
   blogId,
   bookmark,
+  userId,
+  handleBookmarkCreation
 }) => {
   const router = useRouter();
 
   const handleClick = () => {
     router.push(`/blog/${blogId}`);
   };
+
+
   return (
     <div>
       <div
         className=" w-full flex flex-col cursor-pointer text-white gap-3 items-start justify-start hover:bg-white hover:text-black p-1  rounded-lg transition "
         onClick={handleClick}
       >
-        <div className="flex flex-col justify-center items-end w-full">
+        <div className="flex flex-col justify-center items-end w-full" onClick={(e)=>handleBookmarkCreation(e,userId,blogId)}>
           {bookmark && (
             <Star
               className="text-white hover:text-red-500 transition-colors"

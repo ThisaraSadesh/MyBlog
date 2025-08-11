@@ -11,7 +11,8 @@ import Pagination from "./Pagination";
 import { useSession } from "next-auth/react";
 import { handleBlogClick } from "../actions/blogs/handleBlogClick";
 import LoadingSplash from "./LoadingSplash";
-
+import handleCreateBookmark from "../actions/bookmarks/handleCreateBookMark";
+import { toast } from "sonner";
 const page = () => {
   const [blogs, setBlogs] = useState([]);
   const [blogsLength, setBlogsLength] = useState(0);
@@ -44,6 +45,14 @@ const page = () => {
     }, 1000);
     return () => clearTimeout(timeout);
   }, [searchParams]);
+
+  const handleBookmarkCreation = async (e, userId, blogId) => {
+    const data = await handleCreateBookmark(e, userId, blogId);
+    console.log('data response',data)
+    if (data === 'true') {
+      toast.success("Bookmark Added!");
+    }
+  };
 
   return (
     <div className=" text-white  w-screen h-screen">
@@ -90,7 +99,8 @@ const page = () => {
                   image={blog.image}
                   blogId={blog.blogId}
                   bookmark={true}
-                  
+                  userId={session?.user?.id}
+                  handleBookmarkCreation={handleBookmarkCreation}
                 />
               </div>
             ))}
